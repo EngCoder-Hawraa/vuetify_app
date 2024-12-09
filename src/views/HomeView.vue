@@ -73,7 +73,7 @@
       <h3 class="text-start">text-start</h3>
       <h3>test</h3>
       <h3>test</h3>
-      <p></p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus amet architecto, beatae consequatur culpa, debitis deleniti dolorum eligendi error ex excepturi iste maiores minima nisi quos tempora tempore unde voluptatibus.</p>
     </div>
   </div>
 </template>
