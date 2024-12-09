@@ -97,7 +97,7 @@
       variant="plain"
       :loading="loading"
       @click="clickMe"
-      ><v-icon>mdi-</v-icon> button</v-btn
+      ><v-icon size="30" color="green">mdi-account-outline</v-icon> User</v-btn
     >
     <v-icon>mdi-clock</v-icon>
   </div>
