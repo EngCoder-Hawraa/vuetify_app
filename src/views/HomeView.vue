@@ -131,7 +131,37 @@
           </v-card>
         </v-col>
       </v-row>
+      <!-- Expansion Panels -->
+      <v-expansion-panels class="my-5" variant="popout">
+        <v-expansion-panel>
+          <v-expansion-panel-title expand-icon="mdi-plus"
+            >test</v-expansion-panel-title
+          >
+          <v-expansion-panel-text
+            >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+            corporis debitis deserunt dolore ducimus eum facere quo, vel.
+            Consequatur explicabo nihil soluta. Ab ad, alias id nisi omnis
+            ratione reprehenderit.</v-expansion-panel-text
+          >
+        </v-expansion-panel>
+      </v-expansion-panels>
     </v-container>
+    <!-- Dialog -->
+    <v-btn @click="dialog = true">Click Me</v-btn>
+    <v-dialog v-model="dialog" fullscreen>
+      <v-card>
+        <v-card-title>This is Dialog</v-card-title>
+        <v-card-text
+          >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque
+          debitis delectus dicta dolore excepturi facilis iusto laborum maxime
+          non nostrum optio, perferendis quibusdam repudiandae, sequi vitae!
+          Adipisci fugiat illum voluptatem?</v-card-text
+        >
+        <v-card-actions>
+          <v-btn @click="dialog = false" color="red">Close</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -141,6 +171,7 @@
 <!--  name: "HomeView",-->
 <!--  data: () => ({-->
 <!--    loading: false,-->
+<!--    dialog: false,-->
 <!--  }),-->
 <!--  methods: {-->
 <!--    clickMe() {-->
@@ -158,6 +189,7 @@
 import { ref } from "vue";
 
 const loading = ref(false);
+const dialog = ref(false);
 
 function clickMe() {
   loading.value = true;
