@@ -170,6 +170,7 @@
           :key="i"
           :value="item.value"
           active-color="primary"
+          variant="pla"
         >
           <v-list-item-title>Title One</v-list-item-title>
           <template v-slot:prepend>
