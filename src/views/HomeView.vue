@@ -148,7 +148,7 @@
     </v-container>
     <!-- Dialog -->
     <v-btn @click="dialog = true">Click Me</v-btn>
-    <v-dialog v-model="dialog" fullscreen>
+    <v-dialog v-model="dialog" transition="dialog-bottom-transition">
       <v-card>
         <v-card-title>This is Dialog</v-card-title>
         <v-card-text
