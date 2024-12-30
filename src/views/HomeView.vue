@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1 class="text font-weight-light">This is homepage</h1>
-    # Grid
+    <!--     Grid      -->
     <v-container fluid>
       <v-row>
         <v-col cols="6" style="border: 1px solid">
@@ -51,13 +51,13 @@
         <v-col cols="6" style="border: 1px solid">Arkan</v-col>
       </v-row>
     </v-container>
-    # Margin Padding & Width
+    <!--     Margin Padding & Width      -->
     <div style="border: 1px solid; width: 400px" class="ml-16 mx-auto pt-13">
       Margin & Padding
     </div>
-    # Width (25,50,75,100)
+    <!--     # Width (25,50,75,100)      -->
     <div style="border: 1px solid" class="w-50">Margin & Padding</div>
-    # Display
+    <!-- Display -->
     <span class="d-inline-block">Display Inline Block</span>
     <span class="d-block">Display Block</span>
     <span class="d-none d-md-inline">Display None</span>
@@ -65,7 +65,7 @@
       class="parent d-flex justify-space-between align-center"
       style="height: 200px; border: 1px solid"
     >
-      # Font text-h1 to h6 As you wish
+      <!--# Font text-h1 to h6 As you wish -->
       <p class="text-h1">text-h1</p>
       <p class="text-subtitle-1">text-subtitle-1</p>
       <p class="text-body-2">text-body-2</p>
@@ -80,6 +80,7 @@
       error ex excepturi iste maiores minima nisi quos tempora tempore unde
       voluptatibus.
     </p>
+    <!-- Buttons -->
     <v-btn color="blue" class="text-white mr-2" size="x-small">Button</v-btn>
     <v-btn color="red" class="text-white mr-2" size="small">Button</v-btn>
     <v-btn color="#455667" rounded="xl" class="text-white mr-2">Button</v-btn>
@@ -100,6 +101,37 @@
       ><v-icon size="30" color="green">mdi-account-outline</v-icon> User</v-btn
     >
     <v-icon>mdi-clock</v-icon>
+    <!--  #Cards-->
+    <v-container>
+      <v-row>
+        <v-col v-for="num in 4" :key="num">
+          <v-card variant="outlined">
+            <v-card-title>This is Title</v-card-title>
+            <v-card-subtitle>This is Subtitle</v-card-subtitle>
+            <v-card-text
+              >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias
+              architecto atque aut autem beatae consectetur corporis dicta eaque
+              earum eligendi illum, incidunt laudantium libero, nesciunt non
+              obcaecati qui quis voluptate.</v-card-text
+            >
+            <v-divider color="green" inset length="20%"></v-divider>
+            <v-card-actions>
+              <v-btn>
+                <v-icon>mdi-delete</v-icon>
+              </v-btn>
+              <v-btn>
+                <v-icon>mdi-share</v-icon>
+              </v-btn>
+            </v-card-actions>
+            <!--     Chips And Dividers       -->
+            <v-divider color="red"></v-divider>
+            <v-chip color="red" label variant="outlined" class="mb-5 mt-5"
+              ><v-icon>mdi-account-outline</v-icon> My First Chip</v-chip
+            >
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
