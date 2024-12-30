@@ -65,7 +65,7 @@
       class="parent d-flex justify-space-between align-center"
       style="height: 200px; border: 1px solid"
     >
-      # text-h1 to h6 As you wish
+      # Font text-h1 to h6 As you wish
       <p class="text-h1">text-h1</p>
       <p class="text-subtitle-1">text-subtitle-1</p>
       <p class="text-body-2">text-body-2</p>
@@ -103,19 +103,34 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "HomeView",
-  data: () => ({
-    loading: false,
-  }),
-  methods: {
-    clickMe() {
-      this.loading = true;
-      setTimeout(() => {
-        this.loading = false;
-      }, 2000);
-    },
-  },
-};
+<!-- Options API -->
+<!--<script>-->
+<!--export default {-->
+<!--  name: "HomeView",-->
+<!--  data: () => ({-->
+<!--    loading: false,-->
+<!--  }),-->
+<!--  methods: {-->
+<!--    clickMe() {-->
+<!--      this.loading = true;-->
+<!--      setTimeout(() => {-->
+<!--        this.loading = false;-->
+<!--      }, 2000);-->
+<!--    },-->
+<!--  },-->
+<!--};-->
+<!--</script>-->
+
+<!-- Composition API -->
+<script setup>
+import { ref } from "vue";
+
+const loading = ref(false);
+
+function clickMe() {
+  loading.value = true;
+  setTimeout(() => {
+    loading.value = false;
+  }, 2000);
+}
 </script>
