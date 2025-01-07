@@ -179,6 +179,49 @@
         </v-list-item>
       </v-list>
     </v-card>
+    <v-container>
+      <v-row>
+        <v-col cols-12>
+          <!--Sheet-->
+          <v-sheet class="bg-grey-lighten-1 pa-10" rounded elevation="3">
+            <p>test</p>
+          </v-sheet>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <v-container class="mb-5">
+      <v-row>
+        <v-col cols="12">
+          <v-btn class="mb-10" id="my_btn">Activator</v-btn>
+          <!--Menu-->
+          <v-menu activator="#my_btn" offset="12" location="bottom">
+            <v-list>
+              <v-list-item
+                title="Profile"
+                :to="{ name: 'about' }"
+                append-icon="mdi-account"
+              ></v-list-item>
+              <v-list-item
+                title="Logout"
+                append-icon="mdi-logout"
+              ></v-list-item>
+            </v-list>
+          </v-menu>
+        </v-col>
+      </v-row>
+    </v-container>
+    <v-container class="mb-5">
+      <v-row class="mb-5">
+        <v-col cols="12">
+          <!--Tooltip-->
+          <span>
+            <v-icon>mdi-delete</v-icon>
+            <v-tooltip activator="parent" location="top">Delete All</v-tooltip>
+          </span>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
