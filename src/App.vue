@@ -70,6 +70,14 @@
   <router-view />
 </template>
 
+<v-layout>
+  <h1></h1>
+</v-layout>
+
+
+
+
+
 <script setup>
 import { ref } from "vue";
 const items = ref(["test One", "test Two", "test Three"]);
