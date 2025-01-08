@@ -54,20 +54,47 @@
     <!--    </v-footer>-->
     <!--Tabs-->
     <v-card class="w-100">
-      <v-tabs v-model="tab" stacked>
-        <v-tab v-for="num in 4" :key="num" :value="num">
+      <v-tabs
+        v-model="tab"
+        stacked
+        align-tabs="center"
+        center-active
+        bg-color="red"
+        fixed-tabs
+        prev-icon="mdi-arrow-left"
+      >
+        <v-tab v-for="num in 20" :key="num" :value="num" variant="outlined">
           <v-icon>mdi-home</v-icon>
           Tab {{ num }}
         </v-tab>
       </v-tabs>
       <v-window v-model="tab" class="mt-5">
-        <v-window-item v-for="num in 4" :key="num" :value="num">
+        <v-window-item v-for="num in 20" :key="num" :value="num">
           <v-card>
             <v-card-title>Card {{ num }}</v-card-title>
           </v-card>
         </v-window-item>
       </v-window>
     </v-card>
+    <v-container>
+      <v-row>
+        <v-col cols="12">
+          <!--Loading(linear-circular)-->
+          <v-progress-linear
+            indeterminate
+            class="mt-5"
+            color="green"
+          ></v-progress-linear>
+          <v-progress-circular
+            size="100"
+            width="20"
+            indeterminate
+            class="my-5 mx-auto d-block"
+          ></v-progress-circular>
+          <v-btn @click="startLoading">Click me</v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
   </v-layout>
 
   <!--Toolbar-->
@@ -90,6 +117,13 @@
 import { ref } from "vue";
 // const items = ref(["test One", "test Two", "test Three"]);
 const tab = ref("");
+const loading = ref(false);
+const startLoading = () => {
+  loading.value = true;
+  setTimeout(() => {
+    loading.value = false;
+  }, 2000);
+};
 </script>
 <style lang="scss">
 #app {
