@@ -95,6 +95,9 @@
         </v-col>
       </v-row>
     </v-container>
+
+    <!--Pagination-->
+    <v-card min-height="70vh" min-width="100%"></v-card>
   </v-layout>
 
   <!--Toolbar-->
@@ -123,6 +126,10 @@ const startLoading = () => {
   setTimeout(() => {
     loading.value = false;
   }, 2000);
+};
+
+const getData = async () => {
+  await fetch("").then((res) => res.json()).then(data => console.log(data));
 };
 </script>
 <style lang="scss">
