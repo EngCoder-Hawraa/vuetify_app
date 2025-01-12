@@ -1,6 +1,41 @@
 <template>
   <!--Layout & Appbar-->
   <v-layout>
+    <v-container>
+      <v-row>
+        <v-col cols="12">
+          <!--Pagination-->
+          <v-card min-height="60vh" min-width="100%" :loading="loading">
+            <v-row style="height: 100%" v-if="!loading">
+              <v-col clos="3" v-for="item in passengers.data" :key="item._id">
+                <v-card>
+                  <v-card-title>{{ item.name }}</v-card-title>
+                  <v-card-title>{{ item.trips }}</v-card-title>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
+        <v-col cols="12">
+          <v-card>
+            <v-pagination
+              v-model="page"
+              :length="passengers.totalPages"
+              color="blue"
+              @update:model-value="getData"
+              rounded="circle"
+              elevation="2"
+              ellipsis="=> => =>"
+              prev-icon="mdi-arrow-left"
+              next-icon="mdi-arrow-right"
+            ></v-pagination>
+          </v-card>
+        </v-col>
+        <v-col>
+          <v-btn @click="getData">Fetch</v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
     <!--    <v-app-bar-->
     <!--      theme="dark"-->
     <!--      elevation="0"-->
@@ -25,11 +60,11 @@
     <!--      </v-breadcrumbs>-->
     <!--    </v-app-bar>-->
     <!--Bottom Navigation-->
-    <v-bottom-navigation class="bg-red">
-      <v-btn><v-icon>mdi-home</v-icon></v-btn>
-      <v-btn><v-icon>mdi-account</v-icon></v-btn>
-      <v-btn><v-icon>mdi-music</v-icon></v-btn>
-    </v-bottom-navigation>
+    <!--    <v-bottom-navigation class="bg-red">-->
+    <!--      <v-btn><v-icon>mdi-home</v-icon></v-btn>-->
+    <!--      <v-btn><v-icon>mdi-account</v-icon></v-btn>-->
+    <!--      <v-btn><v-icon>mdi-music</v-icon></v-btn>-->
+    <!--    </v-bottom-navigation>-->
     <!--System Bar-->
     <!--    <v-system-bar color="red" elevation="10">-->
     <!--      <v-icon class="mr-2">mdi-wifi-strength-3</v-icon>-->
@@ -53,51 +88,48 @@
     <!--      </div>-->
     <!--    </v-footer>-->
     <!--Tabs-->
-    <v-card class="w-100">
-      <v-tabs
-        v-model="tab"
-        stacked
-        align-tabs="center"
-        center-active
-        bg-color="red"
-        fixed-tabs
-        prev-icon="mdi-arrow-left"
-      >
-        <v-tab v-for="num in 20" :key="num" :value="num" variant="outlined">
-          <v-icon>mdi-home</v-icon>
-          Tab {{ num }}
-        </v-tab>
-      </v-tabs>
-      <v-window v-model="tab" class="mt-5">
-        <v-window-item v-for="num in 20" :key="num" :value="num">
-          <v-card>
-            <v-card-title>Card {{ num }}</v-card-title>
-          </v-card>
-        </v-window-item>
-      </v-window>
-    </v-card>
-    <v-container>
-      <v-row>
-        <v-col cols="12">
-          <!--Loading(linear-circular)-->
-          <v-progress-linear
-            indeterminate
-            class="mt-5"
-            color="green"
-          ></v-progress-linear>
-          <v-progress-circular
-            size="100"
-            width="20"
-            indeterminate
-            class="my-5 mx-auto d-block"
-          ></v-progress-circular>
-          <v-btn @click="startLoading">Click me</v-btn>
-        </v-col>
-      </v-row>
-    </v-container>
-
-    <!--Pagination-->
-    <v-card min-height="70vh" min-width="100%"></v-card>
+    <!--    <v-card class="w-100">-->
+    <!--      <v-tabs-->
+    <!--        v-model="tab"-->
+    <!--        stacked-->
+    <!--        align-tabs="center"-->
+    <!--        center-active-->
+    <!--        bg-color="red"-->
+    <!--        fixed-tabs-->
+    <!--        prev-icon="mdi-arrow-left"-->
+    <!--      >-->
+    <!--        <v-tab v-for="num in 20" :key="num" :value="num" variant="outlined">-->
+    <!--          <v-icon>mdi-home</v-icon>-->
+    <!--          Tab {{ num }}-->
+    <!--        </v-tab>-->
+    <!--      </v-tabs>-->
+    <!--      <v-window v-model="tab" class="mt-5">-->
+    <!--        <v-window-item v-for="num in 20" :key="num" :value="num">-->
+    <!--          <v-card>-->
+    <!--            <v-card-title>Card {{ num }}</v-card-title>-->
+    <!--          </v-card>-->
+    <!--        </v-window-item>-->
+    <!--      </v-window>-->
+    <!--    </v-card>-->
+    <!--    <v-container>-->
+    <!--      <v-row>-->
+    <!--        <v-col cols="12">-->
+    <!--          &lt;!&ndash;Loading(linear-circular)&ndash;&gt;-->
+    <!--          <v-progress-linear-->
+    <!--            indeterminate-->
+    <!--            class="mt-5"-->
+    <!--            color="green"-->
+    <!--          ></v-progress-linear>-->
+    <!--          <v-progress-circular-->
+    <!--            size="100"-->
+    <!--            width="20"-->
+    <!--            indeterminate-->
+    <!--            class="my-5 mx-auto d-block"-->
+    <!--          ></v-progress-circular>-->
+    <!--          <v-btn @click="startLoading">Click me</v-btn>-->
+    <!--        </v-col>-->
+    <!--      </v-row>-->
+    <!--    </v-container>-->
   </v-layout>
 
   <!--Toolbar-->
@@ -117,20 +149,39 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-// const items = ref(["test One", "test Two", "test Three"]);
-const tab = ref("");
-const loading = ref(false);
-const startLoading = () => {
-  loading.value = true;
-  setTimeout(() => {
-    loading.value = false;
-  }, 2000);
-};
+import { ref, onMounted } from "vue";
+// // const items = ref(["test One", "test Two", "test Three"]);
+// const tab = ref("");
+// const loading = ref(false);
+// const startLoading = () => {
+//   loading.value = true;
+//   setTimeout(() => {
+//     loading.value = false;
+//   }, 2000);
+// };
 
+const passengers = ref([]);
+const loading = ref(false);
+const page = ref(1);
 const getData = async () => {
-  await fetch("").then((res) => res.json()).then(data => console.log(data));
+  loading.value = true;
+  try {
+    const response = await fetch(
+      `https://api.instantwebtools.net/v1/passenger?page=${
+        page.value - 1
+      }&size=10`
+    );
+    const data = await response.json(); // Wait for the JSON response
+    // console.log(data); // Log the data to the console
+    passengers.value = data; // Assign the data to passengers
+    loading.value = false;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
 };
+onMounted(async () => {
+  await getData();
+});
 </script>
 <style lang="scss">
 #app {
