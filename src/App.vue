@@ -159,15 +159,22 @@
         <v-app-bar color="red">
           <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
         </v-app-bar>
-        <v-navigation-drawer color="green" v-model="drawer">
+        <v-navigation-drawer
+          color="blue"
+          class="px-0"
+          permanent
+          rail
+          expand-on-hover
+        >
           <v-list nav class="text-start">
             <v-list-item
               v-for="num in 5"
               :key="num"
               prepend-icon="mdi-home"
               @click="console.log('clicked')"
+              :value="num"
             >
-              List {{ num }}
+              <v-list-item-title>List {{ num }}</v-list-item-title>
             </v-list-item>
             <v-list-group>
               <template v-slot:activator="{ props }">
