@@ -5,7 +5,12 @@
       <v-row>
         <v-col cols="12">
           <!--Pagination-->
-          <v-card min-height="60vh" min-width="100%" :loading="loading">
+          <v-card
+            min-height="60vh"
+            min-width="100%"
+            class="my-5"
+            :loading="loading"
+          >
             <v-row style="height: 100%" v-if="!loading">
               <v-col clos="3" v-for="item in passengers.data" :key="item._id">
                 <v-card>
@@ -146,6 +151,39 @@
   <!--    <router-link to="/about">About</router-link>-->
   <!--  </nav>-->
   <router-view />
+
+  <!--  Navigation Drawer-->
+  <v-container>
+    <v-layout>
+      <v-card min-width="100%">
+        <v-app-bar color="red">
+          <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+        </v-app-bar>
+        <v-navigation-drawer color="green" v-model="drawer">
+          <v-list nav class="text-start">
+            <v-list-item
+              v-for="num in 5"
+              :key="num"
+              prepend-icon="mdi-home"
+              @click="console.log('clicked')"
+            >
+              List {{ num }}
+            </v-list-item>
+            <v-list-group>
+              <template v-slot:activator="{ props }">
+                <v-list-item prepend-icon="mdi-account" v-bind="props">
+                  <v-list-item-title>test</v-list-item-title>
+                </v-list-item>
+              </template>
+              <v-list-item>
+                <v-list-item-title>test</v-list-item-title>
+              </v-list-item>
+            </v-list-group>
+          </v-list>
+        </v-navigation-drawer>
+      </v-card>
+    </v-layout>
+  </v-container>
 </template>
 
 <script setup>
@@ -163,6 +201,7 @@ import { ref, onMounted } from "vue";
 const passengers = ref([]);
 const loading = ref(false);
 const page = ref(1);
+const drawer = ref(false);
 const getData = async () => {
   loading.value = true;
   try {
