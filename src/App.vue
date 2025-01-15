@@ -217,10 +217,18 @@
           v-model="selected"
           variant="outlined"
           :error-messages="errMsg"
+          item-title="text"
+          item-value="myVal"
           autofocus
           multiple
+          return-object
         ></v-select>
         <v-btn @click="validate">Submit</v-btn>
+      </v-card>
+    </v-layout>
+    <v-layout>
+      <v-card min-width="100%" min-height="50vh" variant="outlined">
+        <v-text-field variant="outlined" v-model="myText"></v-text-field>
       </v-card>
     </v-layout>
   </v-container>
@@ -248,16 +256,32 @@ const write = ref("");
 const errMsg = ref("");
 const items = ref([
   // "",
-  "ahmed",
-  "amgad",
-  "asaad",
-  "ayman",
-  "mohamed",
-  "mostafa",
-  "mahmoud",
-  "sami",
-  "samia",
-  "samir",
+  // "ahmed",
+  // "amgad",
+  // "asaad",
+  // "ayman",
+  // "mohamed",
+  // "mostafa",
+  // "mahmoud",
+  // "sami",
+  // "samia",
+  // "samir",
+  {
+    text: "Hawraa",
+    myVal: 1,
+  },
+  {
+    text: "Afnan",
+    myVal: 2,
+  },
+  {
+    text: "Arkan",
+    myVal: 3,
+  },
+  {
+    text: "Salih",
+    myVal: 4,
+  },
 ]);
 
 const validate = () => {
