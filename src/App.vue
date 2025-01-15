@@ -191,6 +191,35 @@
       </v-card>
     </v-layout>
   </v-container>
+  <v-container>
+    <v-layout>
+      <v-card min-width="100%">
+        {{ search }}
+        {{ write }}
+        <v-autocomplete
+          :items="items"
+          v-model="search"
+          v-model:search="write"
+          no-data-text="لا يوجد بيانات"
+          variant="outlined"
+          :error-messages="errMsg"
+          class="text-start"
+        ></v-autocomplete>
+        <v-btn @click="validate">submit</v-btn>
+      </v-card>
+    </v-layout>
+    <v-layout>
+      <v-card min-width="100%" min-height="50vh" variant="outlined">
+        <v-select
+          :items="items"
+          v-model="selected"
+          variant="outlined"
+          :error-messages="errMsg"
+        ></v-select>
+        <v-btn @click="validate">Submit</v-btn>
+      </v-card>
+    </v-layout>
+  </v-container>
 </template>
 
 <script setup>
@@ -209,6 +238,34 @@ const passengers = ref([]);
 const loading = ref(false);
 const page = ref(1);
 const drawer = ref(false);
+const search = ref("");
+const selected = ref("");
+const write = ref("");
+const errMsg = ref("");
+const items = ref([
+  "",
+  "ahmed",
+  "amgad",
+  "asaad",
+  "ayman",
+  "mohamed",
+  "mostafa",
+  "mahmoud",
+  "sami",
+  "samia",
+  "samir",
+]);
+
+const validate = () => {
+  errMsg.value = "";
+  if (!search.value) {
+    errMsg.value = "Please select a name";
+  }
+  if (!selected.value) {
+    errMsg.value = "Please select a name";
+  }
+};
+
 const getData = async () => {
   loading.value = true;
   try {
