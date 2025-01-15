@@ -210,11 +210,15 @@
     </v-layout>
     <v-layout>
       <v-card min-width="100%" min-height="50vh" variant="outlined">
+        {{ selected }}
         <v-select
+          class="text-start"
           :items="items"
           v-model="selected"
           variant="outlined"
           :error-messages="errMsg"
+          autofocus
+          multiple
         ></v-select>
         <v-btn @click="validate">Submit</v-btn>
       </v-card>
@@ -239,11 +243,11 @@ const loading = ref(false);
 const page = ref(1);
 const drawer = ref(false);
 const search = ref("");
-const selected = ref("");
+const selected = ref([]);
 const write = ref("");
 const errMsg = ref("");
 const items = ref([
-  "",
+  // "",
   "ahmed",
   "amgad",
   "asaad",
@@ -262,7 +266,7 @@ const validate = () => {
     errMsg.value = "Please select a name";
   }
   if (!selected.value) {
-    errMsg.value = "Please select a name";
+    errMsg.value.length = "Please select a name";
   }
 };
 
