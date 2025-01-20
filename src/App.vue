@@ -231,6 +231,54 @@
         <v-text-field variant="outlined" v-model="myText"></v-text-field>
       </v-card>
     </v-layout>
+    <v-layout>
+      <v-card
+        min-width="100%"
+        class="pa-4"
+        min-height="50vh"
+        variant="outlined"
+      >
+        {{ myText }}
+        <v-text-field
+          type="password"
+          variant="outlined"
+          label="Enter Your Email"
+          v-model="myText"
+          :error-messages="errMsg"
+        ></v-text-field>
+        <v-textarea
+          variant="outlined"
+          no-resize
+          v-model="myText"
+          :error-messages="errMsg"
+          :rows="10"
+          label="my text area"
+        ></v-textarea>
+        <v-btn @click="validate">validate</v-btn>
+      </v-card>
+    </v-layout>
+    <v-layout>
+      <v-card
+        min-width="100%"
+        class="pa-4"
+        min-height="50vh"
+        variant="outlined"
+      >
+        <v-row>
+          <v-col cols="3">
+            <v-card>
+              <v-card-title>Hawraa</v-card-title>
+              <v-card-text
+                >Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Aperiam corporis distinctio est, fuga fugit odit officia placeat
+                reprehenderit tempora tempore! Doloribus repudiandae sequi sint!
+                Aliquam beatae nemo perferendis quis velit!</v-card-text
+              >
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-card>
+    </v-layout>
   </v-container>
 </template>
 
@@ -245,7 +293,7 @@ import { ref, onMounted } from "vue";
 //     loading.value = false;
 //   }, 2000);
 // };
-
+const myText = ref("");
 const passengers = ref([]);
 const loading = ref(false);
 const page = ref(1);
@@ -291,6 +339,9 @@ const validate = () => {
   }
   if (!selected.value) {
     errMsg.value.length = "Please select a name";
+  }
+  if (!myText.value) {
+    errMsg.value = "Please select a name";
   }
 };
 
