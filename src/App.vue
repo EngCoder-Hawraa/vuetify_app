@@ -261,22 +261,74 @@
       <v-card
         min-width="100%"
         class="pa-4"
-        min-height="50vh"
+        min-height="90vh"
         variant="outlined"
       >
         <v-row>
           <v-col cols="3">
+            <v-card-title>Hawraa</v-card-title>
+            <v-card-text
+              >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum
+              eos et ipsam, iusto libero minima modi molestias nam natus
+              praesentium quam qui quos suscipit tempora velit vitae voluptatem.
+              A, cum?</v-card-text
+            >
+          </v-col>
+        </v-row>
+      </v-card>
+    </v-layout>
+    <v-layout>
+      <v-card
+        min-width="100%"
+        class="pa-4"
+        min-height="50vh"
+        variant="outlined"
+      >
+        <v-row>
+          <v-col cols="12">
+            {{ selected }}
+          </v-col>
+          <v-col cols="3" v-for="item in items" :key="item.text">
             <v-card>
-              <v-card-title>Hawraa</v-card-title>
-              <v-card-text
-                >Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Aperiam corporis distinctio est, fuga fugit odit officia placeat
-                reprehenderit tempora tempore! Doloribus repudiandae sequi sint!
-                Aliquam beatae nemo perferendis quis velit!</v-card-text
-              >
+              <v-card-title>{{ item.text }}</v-card-title>
+              <v-card-text>{{ item.myVal }}</v-card-text>
+              <v-card-actions>
+                <v-checkbox
+                  v-model="selected"
+                  :value="item"
+                  label="select"
+                ></v-checkbox>
+              </v-card-actions>
             </v-card>
           </v-col>
         </v-row>
+      </v-card>
+    </v-layout>
+    <v-layout>
+      <v-card
+        min-width="100%"
+        class="pa-4"
+        min-height="90vh"
+        variant="outlined"
+      >
+        {{ selected }}
+        <v-radio-group
+          v-model="selected"
+          true-icon="mdi-check"
+          false-icon="mdi-close"
+        >
+          <v-radio
+            style="width: fit-content"
+            label="Hawraa"
+            value="Hawraa"
+          ></v-radio>
+          <v-radio
+            style="width: fit-content"
+            label="Arkan"
+            value="Arkan"
+          ></v-radio>
+        </v-radio-group>
+        <v-text-field disabled model-value="test"></v-text-field>
       </v-card>
     </v-layout>
   </v-container>
