@@ -400,8 +400,58 @@
     </v-layout>
   </v-container>
   <div class="d-flex align-center flex-column pa-6">
-    <v-card width="70%">
-      <v-table height="200" hover density="compact">
+    <v-card width="70%" class="pa-5 justify-space-between">
+      <v-btn-toggle
+        v-model="toggle"
+        mandatory
+        multiple
+        color="primary"
+        divided
+        variant="outlined"
+        elevation="10"
+      >
+        <v-btn value="home"><v-icon>mdi-home</v-icon></v-btn>
+        <v-btn value="account"><v-icon>mdi-account</v-icon></v-btn>
+        <v-btn value="file"><v-icon>mdi-file-document</v-icon></v-btn>
+        <v-btn value="music"><v-icon>mdi-music</v-icon></v-btn>
+      </v-btn-toggle>
+      Toggle is: {{ toggle }}
+      <v-btn-toggle
+        v-model="textAlignment"
+        color="primary"
+        divided
+        variant="outlined"
+        mandatory
+      >
+        <v-btn value="start"><v-icon>mdi-format-align-left</v-icon></v-btn>
+        <v-btn value="center"><v-icon>mdi-format-align-center</v-icon></v-btn>
+        <v-btn value="end"><v-icon>mdi-format-align-right</v-icon></v-btn>
+      </v-btn-toggle>
+      <v-btn-toggle
+        v-model="fontStyle"
+        color="primary"
+        divided
+        variant="outlined"
+        mandatory
+      >
+        <v-btn value="bold"><v-icon>mdi-format-bold</v-icon></v-btn>
+        <v-btn value="italic"><v-icon>mdi-format-italic</v-icon></v-btn>
+        <v-btn value="underline"><v-icon>mdi-format-underline</v-icon></v-btn>
+      </v-btn-toggle>
+      <v-card width="70%" class="pa-5">
+        <textarea
+          :class="[
+            'w-100',
+            'pa-5',
+            `text-${fontStyle}`,
+            `font-weight-${fStyle}`,
+          ]"
+          style="border: 1px solid"
+          rows="10"
+        ></textarea>
+        {{ fStyle }}
+      </v-card>
+      <v-table height="200" hover density="compact" fixed-header fixed-footer>
         <thead>
           <tr>
             <th>Name</th>
@@ -418,13 +468,19 @@
             <td>{{ Item.country }}</td>
           </tr>
         </tbody>
+        <tfoot>
+          <tr>
+            <td class="bg-grey">Table Data</td>
+            <td class="bg-grey" colspan="3">Users</td>
+          </tr>
+        </tfoot>
       </v-table>
     </v-card>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 // // const items = ref(["test One", "test Two", "test Three"]);
 // const tab = ref("");
 // const loading = ref(false);
@@ -451,7 +507,19 @@ const increase = () => {
 const decrease = () => {
   range.value -= 1;
 };
-
+const toggle = ref([]);
+const textAlignment = ref("start");
+const fontStyle = ref([]);
+// Computed
+const fStyle = computed(() => {
+  return fontStyle.value.filter((el) => el === "bold").join();
+});
+const fItalic = computed(() => {
+  return fontStyle.value.filter((el) => el === "italic").join();
+});
+const fLine = computed(() => {
+  return fontStyle.value.filter((el) => el === "underline").join();
+});
 const Items = ref([
   {
     name: "Hawraa",
@@ -555,6 +623,7 @@ const getData = async () => {
     console.error("Error fetching data:", error);
   }
 };
+
 onMounted(async () => {
   await getData();
 });
