@@ -331,7 +331,96 @@
         <v-text-field disabled model-value="test"></v-text-field>
       </v-card>
     </v-layout>
+    <v-layout>
+      <v-card
+        min-width="100%"
+        class="pa-4"
+        min-height="90vh"
+        variant="outlined"
+      >
+        <v-file-input
+          v-model:model-value="img"
+          multiple
+          @update:model-value="renderImg"
+          chips
+          variant="outlined"
+        ></v-file-input>
+        <v-card>
+          <img :src="imgUrl" alt="" width="500" />
+        </v-card>
+      </v-card>
+    </v-layout>
+    <v-layout>
+      <v-card
+        min-width="100%"
+        class="pa-4"
+        min-height="90vh"
+        variant="outlined"
+      >
+        <v-slider
+          :min="0"
+          :max="10"
+          v-model="range"
+          step="1"
+          prepend-icon="mdi-minus"
+          append-icon="mdi-plus"
+          class="mt-6"
+          color="red"
+          track-color="green"
+          thumb-label="always"
+          thumb-size="30"
+          @click:append="increase"
+          @click:prepend="decrease"
+        ></v-slider>
+      </v-card>
+    </v-layout>
+    <v-layout>
+      <v-app-bar :theme="switchData"></v-app-bar>
+      <v-card
+        min-width="100%"
+        class="pa-4 mt-10"
+        min-height="90vh"
+        variant="outlined"
+      >
+        <v-switch
+          :label="`Theme: ${switchData}`"
+          v-model="switchData"
+          false-value="light"
+          true-value="dark"
+        ></v-switch>
+      </v-card>
+      <!--      <v-footer app class="pa-5" :theme="switchData">-->
+      <!--        <p>-->
+      <!--          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid-->
+      <!--          aperiam asperiores aspernatur at atque dolorem ducimus eos fuga, fugit-->
+      <!--          incidunt labore magni modi quibusdam quisquam ratione rem-->
+      <!--          reprehenderit voluptate voluptatem.-->
+      <!--        </p>-->
+      <!--      </v-footer>-->
+    </v-layout>
   </v-container>
+  <div class="d-flex align-center flex-column pa-6">
+    <v-card width="70%">
+      <v-table height="200" hover density="compact">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Favourite Sport</th>
+            <th>Country</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="Item in Items" :key="Item.name">
+            <td>{{ Item.name }}</td>
+            <td>{{ Item.age }}</td>
+            <td>{{ Item.favouriteSport }}</td>
+            <td>{{ Item.country }}</td>
+          </tr>
+        </tbody>
+      </v-table>
+    </v-card>
+  </div>
 </template>
 
 <script setup>
@@ -354,6 +443,42 @@ const search = ref("");
 const selected = ref([]);
 const write = ref("");
 const errMsg = ref("");
+const range = ref(0);
+const switchData = ref("Light");
+const increase = () => {
+  range.value += 1;
+};
+const decrease = () => {
+  range.value -= 1;
+};
+
+const Items = ref([
+  {
+    name: "Hawraa",
+    age: 29,
+    favouriteSport: "football",
+    country: "Iraq",
+  },
+  {
+    name: "Saja",
+    age: 27,
+    favouriteSport: "football",
+    country: "Iraq",
+  },
+  {
+    name: "Ghofran",
+    age: 24,
+    favouriteSport: "football",
+    country: "Iraq",
+  },
+  {
+    name: "Ali",
+    age: 21,
+    favouriteSport: "football",
+    country: "Iraq",
+  },
+]);
+
 const items = ref([
   // "",
   // "ahmed",
@@ -383,6 +508,23 @@ const items = ref([
     myVal: 4,
   },
 ]);
+
+const img = ref("");
+const imgUrl = ref("");
+const renderImg = () => {
+  if (!img.value[0]) {
+    imgUrl.value = "";
+    return;
+  }
+  console.log("validated");
+  const file = img.value[0];
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.addEventListener("load", () => {
+    // console.log(reader.result);
+    imgUrl.value = reader.result;
+  });
+};
 
 const validate = () => {
   errMsg.value = "";
